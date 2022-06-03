@@ -1,5 +1,6 @@
 from statistics import mode
 from flask import Flask
+from flask_migrate import Migrate
 import models
 from routes import user_blueprint
 
@@ -10,5 +11,7 @@ models.init_app(app)
 
 app.register_blueprint(user_blueprint)
 
+migrate = Migrate(app,models.db)
 
-app.run()
+if __name__=='__main__':
+    app.run(debug=True)
